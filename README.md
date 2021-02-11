@@ -4,9 +4,28 @@ nemlog-55771
 
 ## はじめに
 
-## WEBアプリケーション
+今回はご自身のAndroidスマホで上で簡単なWEBアプリを起動して、スマホのブラウザからアクセスしてみたり、PCのブラウザからアクセスしてみる方法をご紹介します。
 
-WEBフレームワーク`Bottle`をインストールします。
+Zaif取引所のXEMの最終価格を表示するだけのシンプルなWEBアプリです。
+
+## WEBアプリケーションの起動準備
+
+Pythonの仮想環境をインストールします。Pythonのインストールやセットアップが終わってない方は過去記事をご参照ください。
+
+> python -m venv venv
+
+これで`venv`というディレクトリができたはずです。
+
+この仮想環境を有効にします。
+
+```
+source ./venv/bin/activate
+```
+
+仮想環境を終了する場合は、たんに`deactivate'とタイプしてください。
+
+
+仮想環境にWEBフレームワーク`Bottle`をインストールします。
 
 > $ pip install bottle
 
@@ -20,17 +39,13 @@ Installing collected packages: bottle
 Successfully installed bottle-0.12.19
 ```
 
-一般的にはDjangoやFlaskといったフレームワークが人気ですが、この記事では軽量で高速な`Bottle`ｗ使用します。Bottleは私のお気に入りでもあります。
+一般的にはDjangoやFlaskといったフレームワークが人気ですが、この記事では軽量で高速な`Bottle`を使用します。Bottleは私のお気に入りでもあります。
 
-`Bottle`を使用した簡単なWEBアプリケーション
 
 このアプリではZaifで取り扱っている暗号資産の最終価格を表示します。
 Zaifが提供しているAPIへアクセスするためのモジュールをインストールします。
 
-> $ pip install zaifapi
-
 `> $ pip install zaifapi`
-
 
 ```
 実行例
@@ -65,12 +80,52 @@ Installing collected packages: urllib3, six, idna, chardet, certifi, websocket-c
 Successfully installed Cerberus-1.3.2 certifi-2020.12.5 chardet-4.0.0 idna-2.10 requests-2.25.1 six-1.15.0 urllib3-1.26.3 websocket-client-0.57.0 zaifapi-1.6.3
 ```
 
-http://localhost:8080/
-http://localhost:8080/hello/世界！
+## WEBアプリの起動
+
+次のようにタイプします。 `app.py` は`Python言語で書かれた`WEBアプリのソースコードです。
+
+`$ python app.py`
+
+```
+実行例
+nemlog-55771 $ python app.py
+Bottle v0.12.19 server starting up (using WSGIRefServer())...
+Listening on http://0.0.0.0:8080/
+Hit Ctrl-C to quit.
+```
+
+終了する場合は`Ctrl-C`（コントロールキーを押しながらCを押します）をタイプしてください。
+
+
+## WEBアプリの動作確認
+
+スマホのブラウザで確認する場合
+
 http://localhost:8080/last_price/xem_jpy
 
+PCのブラウザで確認する場合
+
+http://スマホのIPアドレス:8080/last_price/xem_jpy
+
+スマホのIPアドレスは次のコマンドで確認できます。
+
+```
+$ ip -4 a | grep inet
+```
+実行例
+
+```
+nemlog-55771 main $ ip -4 a | grep inet
+    inet 127.0.0.1/8 scope host lo
+    inet 192.168.1.4/24 brd 192.168.1.255 scope global dynamic noprefixroute enp1s0
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-92e7b478080d
+```
+
+## ソースコード
 
 ```python
+# app.py
 from bottle import route, run, template
 from zaifapi import ZaifPublicApi, ZaifFuturesPublicApi, ZaifLeverageTradeApi
 
@@ -100,6 +155,7 @@ host_address = "0.0.0.0"
 
 # アプリケーションサーバーを起動します。
 # ホストのアドレスが 0.0.0.0 の場合は、ローカルネットワークのどのPCからでもアクセスできます
+# そのため、公衆無線LANでは、localhostを使用するようにしましょう。それによって、スマホ内のブラウザからのみアクセスできるようになります。
 run(host=host_address, port=8080, debug=True, reloader=True)
 
 ```
