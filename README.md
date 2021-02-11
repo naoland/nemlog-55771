@@ -12,7 +12,9 @@ Zaif取引所のXEMの最終価格を表示するだけのシンプルなWEBア�
 
 Pythonの仮想環境をインストールします。Pythonのインストールやセットアップが終わってない方は過去記事をご参照ください。
 
-> python -m venv venv
+```
+$ python -m venv venv
+```
 
 これで`venv`というディレクトリができたはずです。
 
@@ -27,10 +29,13 @@ source ./venv/bin/activate
 
 仮想環境にWEBフレームワーク`Bottle`をインストールします。
 
-> $ pip install bottle
+```
+$ pip install bottle
+```
+
+実行例
 
 ```
-実行例
 nemlog-55771 main $ pip install bottle
 Collecting bottle
   Downloading bottle-0.12.19-py3-none-any.whl (89 kB)
@@ -45,10 +50,12 @@ Successfully installed bottle-0.12.19
 このアプリではZaifで取り扱っている暗号資産の最終価格を表示します。
 Zaifが提供しているAPIへアクセスするためのモジュールをインストールします。
 
-`> $ pip install zaifapi`
-
+```
+$ pip install zaifapi
 ```
 実行例
+
+```
 nemlog-55771 main $ pip install zaifapi
 Collecting zaifapi
   Downloading zaifapi-1.6.3.tar.gz (8.5 kB)
@@ -84,10 +91,13 @@ Successfully installed Cerberus-1.3.2 certifi-2020.12.5 chardet-4.0.0 idna-2.10 
 
 次のようにタイプします。 `app.py` は`Python言語で書かれた`WEBアプリのソースコードです。
 
-`$ python app.py`
+```
+$ python app.py
+```
+
+実行例
 
 ```
-実行例
 nemlog-55771 $ python app.py
 Bottle v0.12.19 server starting up (using WSGIRefServer())...
 Listening on http://0.0.0.0:8080/
