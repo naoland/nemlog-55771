@@ -103,9 +103,21 @@ Hit Ctrl-C to quit.
 
 http://localhost:8080/last_price/xem_jpy
 
+
+<img src="https://i.gyazo.com/483bc2879ee2bce27d28f7272e31f136.png" alt="キーボードが非表示状態（縦）" width="40%"/>  
+
+
 PCのブラウザで確認する場合
 
 http://スマホのIPアドレス:8080/last_price/xem_jpy
+
+
+
+![](https://i.gyazo.com/ad44e24e0103f087b7a21add67cbdbb0.png)
+
+
+この例ではIPアドレスが`192.168.1.3`になっています。
+
 
 スマホのIPアドレスは次のコマンドで確認できます。
 
